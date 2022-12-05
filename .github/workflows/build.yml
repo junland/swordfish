@@ -59,4 +59,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ env.FIRMWARE_NAME }}.bin
-        path: .pio/build/${{ matrix.board }}/*.bin
+        path: marlin/.pio/build/${{ matrix.board }}/*.bin
