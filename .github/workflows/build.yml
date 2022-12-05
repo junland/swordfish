@@ -26,6 +26,7 @@ jobs:
         config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_sensor]
     steps:
     - uses: actions/checkout@v3
+      submodules: true
     - name: Cache pip
       uses: actions/cache@v2
       with:
