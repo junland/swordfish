@@ -7,7 +7,7 @@ parser.add_argument('section', help='The section to inject into')
 parser.add_argument('key', help='The key to inject')
 parser.add_argument('value', help='The value to inject')
 parser.add_argument('-a', '--append', action='store_true', help='Append to the value instead of replacing it')
-parser.add_argument('-n', '--newline', default='store_true', help='The newline to use when appending')
+parser.add_argument('-n', '--newline', action='store_true', help='The newline to use when appending')
 
 # Parse the command line arguments.
 args = parser.parse_args()
