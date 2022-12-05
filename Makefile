@@ -29,3 +29,6 @@ config:
 build: dirs
 	$(PLATFORMIO) run -d $(PLATFORMIO_PROJECT_DIR) -c $(PLATFORMIO_CONF) -e $(PLATFORMIO_ENV)
 .PHONY: build
+
+action: clean config build
+.PHONY: action

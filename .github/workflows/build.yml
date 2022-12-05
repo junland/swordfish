@@ -49,11 +49,11 @@ jobs:
         pip install platformio==$PLATFORMIO_VER
     - name: Run PlatformIO Build
       id: build_configs
+      env:
+        PLATFORMIO_ENV: ${{ matrix.board }}
       run: |
         cp -vrf config/${{ matrix.config }}/* marlin/Marlin
-        make dirs
-        make config
-        PLATFORMIO_ENV=${{ matrix.board }} make build
+        make -e action
     - name: Upload Build Binary
       uses: actions/upload-artifact@v3
       with:
