@@ -15,6 +15,7 @@ on:
 
 env:
   PLATFORMIO_VER: 6.1.4
+  PYTHON_VER: 3.11.0
 
 jobs:
   Build-Default:
@@ -28,23 +29,19 @@ jobs:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
-    - name: Cache pip packages
-      uses: actions/cache@v3
+    - name: Setup Python and Cache
+      uses: actions/setup-python@v4
       with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: ${{ runner.os }}-pip-
+        python-version: '${{ env.PYTHON_VER }}'
+        cache: 'pip' # caching pip dependencies
     - name: Cache PlatformIO
       uses: actions/cache@v3
       with:
         path: ~/.pio
         key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-    - name: Set up Python
-      uses: actions/setup-python@v2
     - name: Run OS Update & Install PlatformIO
       run: |
         sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
-        python -m pip install --upgrade pip
         pip install wheel
         pip install platformio==$PLATFORMIO_VER
     - name: Run PlatformIO Build
