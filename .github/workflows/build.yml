@@ -58,5 +58,5 @@ jobs:
     - name: Upload Build Binary
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ env.FIRMWARE_NAME }}.bin
+        name: ${{ matrix.board }}-${{ matrix.config }}-firmware.bin
         path: marlin/.pio/build/${{ matrix.board }}/*.bin
