@@ -49,8 +49,7 @@ jobs:
     - name: Run PlatformIO Build
       id: build_configs
       env:
-        AQUILA_VER: ${{ matrix.chip }}
-        FIRMWARE_NAME: Default-NoProbe-${{ matrix.chip }}
+        PLATFORMIO_ENV: ${{ matrix.board }}
       run: |
         cp -vrf config/${{ matrix.config }}/* marlin/Marlin
         make dirs
