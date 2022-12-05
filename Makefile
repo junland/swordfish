@@ -23,7 +23,7 @@ dirs:
 
 config:
 	cp marlin/platformio.ini $(PLATFORMIO_CONF)
-	$(PYTHON) $(SCRIPTS_DIR)/inject-ini.py marlin/$(PLATFORMIO_CONF) platformio extra_configs $(PWD)/*.ini -a -n
+	$(PYTHON) $(SCRIPTS_DIR)/inject-config.py marlin/$(PLATFORMIO_CONF) platformio extra_configs $(PWD)/*.ini -a -n
 .PHONY: config
 
 build: dirs
