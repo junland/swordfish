@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        board: [STM32F103RET6_voxelab_aquila_G32, STM32F103RET6_voxelab_aquila_N32]
+        board: [STM32F103RET6_voxelab_G32, STM32F103RET6_voxelab_N32]
         config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_sensor]
     steps:
     - uses: actions/checkout@v3
