@@ -29,6 +29,10 @@ jobs:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
+    - name: Inject requirements.txt Dependencies
+      run: |
+        echo "wheel" > requirements.txt
+        echo "platformio==$PLATFORMIO_VER" >> requirements.txt
     - name: Setup Python and Cache
       uses: actions/setup-python@v4
       with:
