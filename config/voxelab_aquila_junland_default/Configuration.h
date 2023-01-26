@@ -138,9 +138,8 @@
 //#define BLUETOOTH
 
 // Choose the name from boards.h that matches your setup
-#ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_CREALITY_V4
-#endif
+#define MOTHERBOARD BOARD_CREALITY_V422
+#define NO_CREALITY_422_DRIVER_WARNING
 
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Aquila"
