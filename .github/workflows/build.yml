@@ -14,8 +14,8 @@ on:
   workflow_dispatch:
 
 env:
-  PLATFORMIO_VER: 6.1.4
-  PYTHON_VER: 3.11.0
+  PLATFORMIO_VER: 6.1.6
+  PYTHON_VER: 3.11.1
 
 jobs:
   Build-Default:
@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         board: [STM32F103RET6_voxelab_G32, STM32F103RET6_voxelab_N32]
-        config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_sensor]
+        config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_bltouch]
     steps:
     - uses: actions/checkout@v3
       with:
