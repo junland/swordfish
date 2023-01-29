@@ -19,7 +19,7 @@ env:
 
 jobs:
   Build-Default:
-    name: Build Default Files
+    name: Build ${{ matrix.config }}-${{ matrix.sub_board }} Firmware
     runs-on: ubuntu-latest
     strategy:
       matrix:
