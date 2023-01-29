@@ -25,6 +25,12 @@ jobs:
       matrix:
         board: [STM32F103RET6_voxelab_G32, STM32F103RET6_voxelab_N32]
         config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_bltouch]
+        include:
+          - board: STM32F103RET6_voxelab_G32
+            sub_board: G32
+          - board: STM32F103RET6_voxelab_N32
+            sub_board: N32
+
     steps:
     - uses: actions/checkout@v3
       with:
@@ -58,5 +64,5 @@ jobs:
     - name: Upload Build Binary
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ matrix.board }}-${{ matrix.config }}-firmware.bin
+        name: ${{ matrix.config }}-${{ matrix.sub_board }}-firmware.bin
         path: marlin/.pio/build/${{ matrix.board }}/*.bin
