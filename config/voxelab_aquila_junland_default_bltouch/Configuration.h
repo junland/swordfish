@@ -57,15 +57,6 @@
  *                      https://www.thingiverse.com/thing:1278865
  */
 
-//===========================================================================
-//========================== DELTA / SCARA / TPARA ==========================
-//===========================================================================
-//
-// Download configurations from the link above and customize for your machine.
-// Examples are located in config/examples/delta, .../SCARA, and .../TPARA.
-//
-//===========================================================================
-
 // @section info
 
 // Author info of this build printed to the host during boot and M115
@@ -138,7 +129,7 @@
 //#define BLUETOOTH
 
 // Choose the name from boards.h that matches your setup
-#define MOTHERBOARD BOARD_CREALITY_V422
+#define MOTHERBOARD BOARD_CREALITY_V4
 #define NO_CREALITY_422_DRIVER_WARNING
 
 // Name displayed in the LCD "Ready" message and Info menu
