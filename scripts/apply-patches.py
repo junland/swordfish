@@ -13,3 +13,9 @@ print("Project dir: " + project_dir)
 print("Workspace dir: " + workspace_dir)
 print("Source dir: " + src_dir)
 print("Build dir: " + build_dir)
+
+# List all files in build_dir
+print("Build dir files:")
+for f in os.listdir(build_dir):
+    print("  " + f)
+
