@@ -4,6 +4,10 @@ from os.path import join, isfile, abspath
 Import("env") # type: ignore
 
 project_dir = env["PROJECT_DIR"] # type: ignore
+workspace_dir = env["PROJECT_DIR"] # type: ignore
+src_dir = env["PROJECT_SRC_DIR"] # type: ignore
 
 # Output project_dir to console
 print("Project dir: " + project_dir)
+print("Workspace dir: " + workspace_dir)
+print("Source dir: " + src_dir)
