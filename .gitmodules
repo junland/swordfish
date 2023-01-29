@@ -2,3 +2,4 @@
 	path = marlin
 	url = https://github.com/MarlinFirmware/Marlin
 	branch = 2.1.x
+	ignore = dirty
