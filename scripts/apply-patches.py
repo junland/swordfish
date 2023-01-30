@@ -14,11 +14,11 @@ print("Workspace dir: " + workspace_dir)
 print("Source dir: " + src_dir)
 print("Build dir: " + build_dir)
 
-# List all files in build_dir within 3 levels
-for root, dirs, files in os.walk(build_dir, topdown=True):
-    print("Found directory: " + root)
-    for name in files:
-        print("Found file: " + os.path.join(root, name))
-        
+for root, dirs, files in os.walk(build_dir):
+    depth = root[len(build_dir) + len(os.path.sep):].count(os.path.sep)
+    if depth > 5:
+        del dirs[:]
+    print(root, dirs, files)
+
 
 
