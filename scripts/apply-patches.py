@@ -20,5 +20,12 @@ for root, dirs, files in os.walk(build_dir):
         del dirs[:]
     print(root, dirs, files)
 
+def before_buildprog(source, target, env):
+    print("before_buildprog")
+    for root, dirs, files in os.walk(build_dir):
+        depth = root[len(build_dir) + len(os.path.sep):].count(os.path.sep)
+        if depth > 5:
+            del dirs[:]
+        print(root, dirs, files)
 
-
+env.AddPreAction("buildprog", before_buildprog) # type: ignore
