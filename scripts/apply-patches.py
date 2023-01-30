@@ -16,9 +16,9 @@ print("Build dir: " + build_dir)
 
 # List all files in build_dir within 3 levels
 for root, dirs, files in os.walk(build_dir, topdown=True):
+    print("Found directory: " + root)
     for name in files:
-        print(os.path.join(root, name))
-    for name in dirs:
-        print(os.path.join(root, name))
+        print("Found file: " + os.path.join(root, name))
+        
 
 
