@@ -1,4 +1,4 @@
-from os.path import join, isfile, abspath
+import os
 
 # Access to global construction environment
 Import("env") # type: ignore
