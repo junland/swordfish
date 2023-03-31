@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         board: [STM32F103RET6_voxelab_G32, STM32F103RET6_voxelab_N32]
-        config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_bltouch]
+        config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_bltouch, creatily_s1_plus_junland_default]
         include:
           - board: STM32F103RET6_voxelab_G32
             sub_board: G32
