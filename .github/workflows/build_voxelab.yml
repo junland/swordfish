@@ -1,0 +1,69 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build Configs for Voxelab Printers
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main", "test-bugfix" ]
+  pull_request:
+    branches: [ "main", "test-bugfix" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  PLATFORMIO_VER: 6.1.6
+  PYTHON_VER: 3.11.1
+
+jobs:
+  Build-Default:
+    name: Build ${{ matrix.config }}-${{ matrix.sub_board }} Firmware
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        board: [STM32F103RET6_voxelab_G32, STM32F103RET6_voxelab_N32]
+        config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_bltouch]
+        include:
+          - board: STM32F103RET6_voxelab_G32
+            sub_board: G32
+          - board: STM32F103RET6_voxelab_N32
+            sub_board: N32
+
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Inject requirements.txt Dependencies
+      run: |
+        echo "wheel" > requirements.txt
+        echo "platformio==$PLATFORMIO_VER" >> requirements.txt
+    - name: Setup Python and Cache
+      uses: actions/setup-python@v4
+      with:
+        python-version: '${{ env.PYTHON_VER }}'
+        cache: 'pip' # caching pip dependencies
+    - name: Cache PlatformIO
+      uses: actions/cache@v3
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+    - name: Run OS Update & Install PlatformIO
+      run: |
+        sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
+        pip install wheel
+        pip install platformio==$PLATFORMIO_VER
+    - name: Run PlatformIO Build
+      id: build_configs
+      env:
+        PLATFORMIO_ENV: ${{ matrix.board }}
+      run: |
+        cp -vrf config/${{ matrix.config }}/* marlin/Marlin
+        make -e action
+    - name: Upload Build Binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.config }}-${{ matrix.sub_board }}-firmware.bin
+        path: marlin/.pio/build/${{ matrix.board }}/*.bin
