@@ -1,0 +1,64 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build Configs for Creality Printers
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main", "test-bugfix" ]
+  pull_request:
+    branches: [ "main", "test-bugfix" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  PLATFORMIO_VER: 6.1.6
+  PYTHON_VER: 3.11.2
+
+jobs:
+  Build-Default:
+    name: Build ${{ matrix.config }} Firmware
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config: [creality_s1_plus_junland_default]
+        board: [STM32F401RC_creality]
+
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Inject requirements.txt Dependencies
+      run: |
+        echo "wheel" > requirements.txt
+        echo "platformio==$PLATFORMIO_VER" >> requirements.txt
+    - name: Setup Python and Cache
+      uses: actions/setup-python@v4
+      with:
+        python-version: '${{ env.PYTHON_VER }}'
+        cache: 'pip' # caching pip dependencies
+    - name: Cache PlatformIO
+      uses: actions/cache@v3
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+    - name: Run OS Update & Install PlatformIO
+      run: |
+        sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
+        pip install wheel
+        pip install platformio==$PLATFORMIO_VER
+    - name: Run PlatformIO Build
+      id: build_configs
+      env:
+        PLATFORMIO_ENV: ${{ matrix.board }}
+      run: |
+        cp -vrf config/${{ matrix.config }}/* marlin/Marlin
+        make -e action
+    - name: Upload Build Binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.config }}-${{ matrix.sub_board }}-firmware.bin
+        path: marlin/.pio/build/${{ matrix.board }}/*.bin
