@@ -15,7 +15,7 @@ on:
 
 env:
   PLATFORMIO_VER: 6.1.6
-  PYTHON_VER: 3.11.1
+  PYTHON_VER: 3.11.2
 
 jobs:
   Build-Default:
