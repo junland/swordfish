@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         config: [creality_s1_plus_junland_default]
-        board: [STM32F401RC]
+        board: [STM32F401RC_creality]
 
 
     steps:
