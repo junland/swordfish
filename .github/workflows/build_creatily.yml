@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        config: [creatilly_s1_plus_junland_default]
+        config: [creality_s1_plus_junland_default]
         board: [STM32F401RC]
 
 
