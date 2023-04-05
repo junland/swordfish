@@ -2591,6 +2591,9 @@
 
 // @section interface
 
+// Ignore display interface auto assign warning.
+#define NO_AUTO_ASSIGN_WARNING
+
 /**
  * LCD LANGUAGE
  *
