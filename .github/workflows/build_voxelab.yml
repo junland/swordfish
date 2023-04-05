@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Build Configs
+name: Build Configs for Voxelab Printers
 
 # Controls when the workflow will run
 on:
@@ -15,7 +13,7 @@ on:
 
 env:
   PLATFORMIO_VER: 6.1.6
-  PYTHON_VER: 3.11.1
+  PYTHON_VER: 3.11.2
 
 jobs:
   Build-Default:
@@ -24,12 +22,13 @@ jobs:
     strategy:
       matrix:
         board: [STM32F103RET6_voxelab_G32, STM32F103RET6_voxelab_N32]
-        config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_bltouch, voxelab_aquila_junland_default_inductive]
+        config: [voxelab_aquila_junland_default, voxelab_aquila_junland_default_bltouch]
         include:
           - board: STM32F103RET6_voxelab_G32
             sub_board: G32
           - board: STM32F103RET6_voxelab_N32
             sub_board: N32
+
 
     steps:
     - uses: actions/checkout@v3
