@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Creality/Ender-3 S1 Plus/STM32F4"
+
 /**
  * Configuration.h
  *
@@ -35,7 +37,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02010200
+#define CONFIGURATION_H_VERSION 02010300
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -60,28 +62,8 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Ender 3 S1 Plus F4)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(tiagofreire-pt, Ender 3 S1 F4)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
-
-/**
- * *** VENDORS PLEASE READ ***
- *
- * Marlin allows you to add a custom boot image for Graphical LCDs.
- * With this option Marlin will first show your custom screen followed
- * by the standard Marlin logo with version number and web URL.
- *
- * We encourage you to take advantage of this new feature and we also
- * respectfully request that you retain the unmodified Marlin boot screen.
- */
-
-// Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
-#define SHOW_BOOTSCREEN
-
-// Show the bitmap in Marlin/_Bootscreen.h on startup.
-//#define SHOW_CUSTOM_BOOTSCREEN
-
-// Show the bitmap in Marlin/_Statusscreen.h on the status screen.
-//#define CUSTOM_STATUS_SCREEN_IMAGE
 
 // @section machine
 
@@ -135,7 +117,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Ender 3 S1 Plus - ABL F4"
+#define CUSTOM_MACHINE_NAME "Ender 3 S1 - ABL F4"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -1115,21 +1097,6 @@
 //#define USE_VMAX_PLUG
 //#define USE_WMAX_PLUG
 
-// Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define I_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define J_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define K_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define I_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define J_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define K_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
-
 // Enable pullup for all endstops to prevent a floating state
 #define ENDSTOPPULLUPS
 #if DISABLED(ENDSTOPPULLUPS)
@@ -1791,8 +1758,8 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 300
-#define Y_BED_SIZE 300
+#define X_BED_SIZE 235
+#define Y_BED_SIZE 235
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1800,7 +1767,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 300
+#define Z_MAX_POS 275
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2591,9 +2558,6 @@
 
 // @section interface
 
-// Ignore display interface auto assign warning.
-#define NO_AUTO_ASSIGN_WARNING
-
 /**
  * LCD LANGUAGE
  *
@@ -3157,14 +3121,16 @@
  *  - Download files as specified for your type of display.
  *  - Plug the microSD card into the back of the display.
  *  - Boot the display and wait for the update to complete.
+ *
+ * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY' ]
  */
-// #define DGUS_LCD_UI ORIGIN
-// #if DGUS_UI_IS(MKS)
-//   #define USE_MKS_GREEN_UI
-// #elif DGUS_UI_IS(IA_CREALITY)
-//   //#define LCD_SCREEN_ROTATE 90          // Portrait Mode or 800x480 displays
-//   //#define IA_CREALITY_BOOT_DELAY 1500   // (ms)
-// #endif
+//#define DGUS_LCD_UI ORIGIN
+#if DGUS_UI_IS(MKS)
+  #define USE_MKS_GREEN_UI
+#elif DGUS_UI_IS(IA_CREALITY)
+  //#define LCD_SCREEN_ROTATE 90          // Portrait Mode or 800x480 displays
+  //#define IA_CREALITY_BOOT_DELAY 1500   // (ms)
+#endif
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
